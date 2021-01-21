@@ -1,0 +1,80 @@
+{
+  "name": "dapla-metadata-webview",
+  "version": "0.1.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/statisticsnorway/dapla-metadata-webview"
+  },
+  "author": "Statistics Norway",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "@statisticsnorway/ssb-component-library": "^2.0.37",
+    "axios": "^0.21.1",
+    "axios-hooks": "^2.3.0",
+    "graphql-hooks": "^5.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1"
+  },
+  "scripts": {
+    "prestart": "react-env --dest ./public",
+    "start": "react-scripts start",
+    "build": "react-scripts build && react-env --dest ./build",
+    "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll=false"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@beam-australia/react-env": "^2.1.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**",
+      "!src/index.js",
+      "!src/**/index.js",
+      "!src/config/**",
+      "!src/enums/**",
+      "!src/__tests__/test-data/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    },
+    "coverageReporters": [
+      "cobertura",
+      "lcov",
+      "text"
+    ]
+  }
+}
