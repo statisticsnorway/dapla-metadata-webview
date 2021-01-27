@@ -1,9 +1,7 @@
-function App () {
-  return (
-    <div>
+import GraphQLTest from './components/GraphQLTest'
 
-    </div>
-  )
+function App () {
+  return <GraphQLTest />
 }
 
 export default App

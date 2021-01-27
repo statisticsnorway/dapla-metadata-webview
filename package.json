@@ -60,7 +60,7 @@
       "!src/index.js",
       "!src/**/index.js",
       "!src/config/**",
-      "!src/enums/**",
+      "!src/graphql/**",
       "!src/__tests__/test-data/**"
     ],
     "coverageThreshold": {

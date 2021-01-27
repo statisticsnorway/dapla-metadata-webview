@@ -5,7 +5,7 @@ metadata exploration services such as
 [exploration-lds](https://github.com/statisticsnorway/dapla-project/blob/master/localstack/docker-compose-exploration.yml).
 
 Functionality includes:
-* Searching, listing and exploring metadata through variables and datasets
+* Searching, listing and exploring metadata through variables and datasets, powered by GraphQL
 
 ### Try this application locally
 The first time you clone the repository, remember to run `yarn install`.
