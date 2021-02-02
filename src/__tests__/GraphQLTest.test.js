@@ -12,26 +12,34 @@ const setup = () => {
   return { getByText }
 }
 
-test('Search is still loading', () => {
+test('Search shows loading', () => {
   useQuery.mockReturnValue({ data: undefined, error: undefined, loading: true })
+
   const { getByText } = setup()
-  expect(getByText('Loading...'))
+
+  expect(getByText('Loading...')).toBeInTheDocument()
 })
 
-test('Search returns an error and it is shown', () => {
+test('Search returns error', () => {
   useQuery.mockReturnValue({ data: undefined, error: { response: { data: 'Problem' } }, loading: false })
+
   const { getByText } = setup()
-  expect(getByText('Oops, something went wrong with the query.'))
+
+  expect(getByText('Oops, something went wrong with the query.')).toBeInTheDocument()
 })
 
 test('Search returns undefined data', () => {
   useQuery.mockReturnValue({ data: undefined, error: undefined, loading: false })
+
   const { getByText } = setup()
-  expect(getByText('Oops, something went wrong when parsing the data.'))
+
+  expect(getByText('Oops, something went wrong when parsing the data.')).toBeInTheDocument()
 })
 
 test('Search returns a valid response', () => {
   useQuery.mockReturnValue({ data: GraphQLTestResult, error: undefined, loading: false })
+
   const { getByText } = setup()
-  expect(getByText('kommune', { exact: false }))
+
+  expect(getByText('kommune', { exact: false })).toBeInTheDocument()
 })

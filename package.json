@@ -22,6 +22,8 @@
     "graphql-hooks": "^5.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-feather": "^2.0.9",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3"
@@ -64,6 +66,7 @@
       "!src/**/index.js",
       "!src/config/**",
       "!src/graphql/**",
+      "!src/language/**",
       "!src/__tests__/test-data/**"
     ],
     "coverageThreshold": {

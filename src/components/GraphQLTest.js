@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useQuery } from 'graphql-hooks'
+import { Paragraph, Title } from '@statisticsnorway/ssb-component-library'
 
 import { TEXT_SEARCH_TEST } from '../graphql'
 
@@ -21,11 +22,11 @@ function GraphQLTest () {
 
   return (
     <>
-      <h1>GraphQL Test</h1>
+      <Title size={2}>GraphQL Test</Title>
       {
-        loading ? <p>Loading...</p> :
-          error ? <p>Oops, something went wrong with the query.</p> :
-            data === undefined ? <p>Oops, something went wrong when parsing the data.</p> :
+        loading ? <Paragraph>Loading...</Paragraph> :
+          error ? <Paragraph>Oops, something went wrong with the query.</Paragraph> :
+            data === undefined ? <Paragraph>Oops, something went wrong when parsing the data.</Paragraph> :
               <pre>{JSON.stringify(data, null, 2)}</pre>
       }
     </>
