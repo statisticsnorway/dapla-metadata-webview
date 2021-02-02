@@ -1,5 +1,5 @@
 export const TEXT_SEARCH_TEST =
-`
+  `
   {
     instanceVariable(filter: {name_every: {languageText_contains: $text}}) {
       id
