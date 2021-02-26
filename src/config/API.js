@@ -1,4 +1,10 @@
 export const API = {
   GET_HEALTH: '/health/ready',
-  GRAPHQL: '/graphql'
+  GRAPHQL: '/graphql',
+  NAMESPACE: 'ns'
+}
+
+export const MODEL = {
+  SF: 'SubjectField',
+  UT: 'UnitType'
 }

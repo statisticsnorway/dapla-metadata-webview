@@ -7,12 +7,11 @@ import App from '../App'
 import { AppContextProvider } from '../context/AppContext'
 import { APP_FOOTER, APP_HEADER_LINKS } from '../language'
 
-jest.mock('../components/GraphQLTest', () => () => null)
+jest.mock('../components/content/search/Search', () => () => null)
 
 const mockScroll = jest.fn()
 
 global.scroll = mockScroll
-global.window.innerWidth = 767 // Simulate mobile screen size
 
 const setup = () => {
   const { getByText } = render(

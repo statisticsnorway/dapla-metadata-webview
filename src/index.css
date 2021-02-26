@@ -1,13 +1,19 @@
 .appSite {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 .appContent {
-  flex: 1;
+    flex: 1;
 }
 
 .ssb-footer-wrapper {
-  padding: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .ssb-input {
+        max-width: none;
+    }
 }

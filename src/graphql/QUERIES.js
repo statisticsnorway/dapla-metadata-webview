@@ -1,27 +1,28 @@
-export const TEXT_SEARCH_TEST =
-`
-  {
-    instanceVariable(filter: {name_every: {languageText_contains: $text}}) {
-      id
-      name {
-        languageText
-        languageCode
-      }
-      description {
-        languageText
-        languageCode
+export const FULL_TEXT_SEARCH =
+  `
+    {
+      instanceVariable(filter: {name_some: {languageText_contains: $text}}) {
+        id
+        name {
+          languageText
+          languageCode
+        }
+        reverseLogicalRecordInstanceVariables {
+          unitType {
+            id
+            name {
+              languageText
+              languageCode
+            }
+            subjectFields {
+              id
+              name {
+                languageText
+                languageCode
+              }
+            }
+          }
+        }
       }
     }
-    unitDataSet(filter: {name_every: {languageText_contains: $text}}) {
-      id
-      name {
-        languageText
-        languageCode
-      }
-      description {
-        languageText
-        languageCode
-      }
-    }
-  }
-`
+  `

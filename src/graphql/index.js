@@ -1,1 +1,1 @@
-export { TEXT_SEARCH_TEST } from './QUERIES'
+export { FULL_TEXT_SEARCH } from './QUERIES'

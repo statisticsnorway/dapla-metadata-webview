@@ -12,6 +12,7 @@ export const ApiContext = createContext({
 export const LanguageContext = createContext(LANGUAGE.LANGUAGES.NORWEGIAN.languageCode)
 
 export const AppContextProvider = (props) => {
+  const [namespace] = useState(API.NAMESPACE)
   const [restApi, setRestApi] = useState(window._env.REACT_APP_API)
   const [graphqlApi, setGraphqlApi] = useState(`${window._env.REACT_APP_API}${API.GRAPHQL}`)
   const [language, setLanguage] = useState(
@@ -24,7 +25,7 @@ export const AppContextProvider = (props) => {
 
   return (
     <ClientContext.Provider value={graphqlClient}>
-      <ApiContext.Provider value={{ graphqlApi, restApi, setGraphqlApi, setRestApi }}>
+      <ApiContext.Provider value={{ namespace, graphqlApi, restApi, setGraphqlApi, setRestApi }}>
         <LanguageContext.Provider value={{ language, setLanguage }}>
           {props.children}
         </LanguageContext.Provider>

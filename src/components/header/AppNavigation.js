@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Grid, List } from 'semantic-ui-react'
+import { ShoppingCart } from 'react-feather'
 import { Title } from '@statisticsnorway/ssb-component-library'
 
 import { LanguageContext } from '../../context/AppContext'
@@ -29,6 +30,9 @@ function AppNavigation () {
             </Title>
           </List.Item>
         )}
+        <List.Item>
+          <ShoppingCart />
+        </List.Item>
       </List>
     </Grid.Column>
   )
