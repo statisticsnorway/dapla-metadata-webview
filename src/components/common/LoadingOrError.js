@@ -33,7 +33,7 @@ function LoadingOrError ({ error, loading }) {
         }
       }
     }
-  }, [error])
+  }, [error, language])
 
   return (
     <>
