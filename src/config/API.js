@@ -12,7 +12,7 @@ export const MODEL = {
 export const QUERY_PATH = {
   UT_ID: ['unitType', 'id'],
   UT_SF: ['unitType', 'subjectFields'],
-  IV_ID: ['variable', 'instanceVariable', 'id'],
-  IV_RL: ['variable', 'instanceVariable', 'reverseLogicalRecordInstanceVariables'],
-  IV_NAME: ['variable', 'instanceVariable', 'name']
+  IV_ID: ['instanceVariable', 'id'],
+  IV_RL: ['instanceVariable', 'reverseLogicalRecordInstanceVariables'],
+  IV_NAME: ['instanceVariable', 'name']
 }

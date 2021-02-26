@@ -4,7 +4,6 @@ import { getNestedObject } from '@statisticsnorway/dapla-js-utilities'
 
 export const dataFiltering = (data, filterBy, filteringMatches) => data.filter(variable => {
   let doNotFilterOut = true
-  //const variableId = variable.instanceVariable.id
   const variableId = getNestedObject(variable, QUERY_PATH.IV_ID)
 
   Object.entries(filterBy).forEach(([entry, ids]) => {
@@ -25,7 +24,6 @@ export const dataFiltering = (data, filterBy, filteringMatches) => data.filter(v
 export const findHitsByType = data => {
   const unitTypeHandler = (unitTypes, variableId) => {
     unitTypes.forEach(unitType => {
-
       const unitTypeId = getNestedObject(unitType, QUERY_PATH.UT_ID)
 
       if (unitTypeId !== undefined) {
@@ -37,7 +35,7 @@ export const findHitsByType = data => {
           hitsByType[MODEL.UT][unitTypeId] = [variableId]
         }
       }
-
+      //const subjectFields = unitType.unitType.subjectFields
       const subjectFields = getNestedObject(unitType, QUERY_PATH.UT_SF)
 
       if (subjectFields !== undefined) {
@@ -68,7 +66,7 @@ export const findHitsByType = data => {
     const unitTypes = getNestedObject(variable, QUERY_PATH.IV_RL)
     const variableId = getNestedObject(variable, QUERY_PATH.IV_ID)
 
-    if(unitTypes !== undefined) {
+    if (unitTypes !== undefined) {
       unitTypeHandler(unitTypes, variableId)
     }
   })
