@@ -64,7 +64,7 @@ test('Search input is received by query', () => {
   )).toBeInTheDocument()
 })
 
-test('Search doesnt crashed with undefined fields in object', () => {
+test('Search is not crashing with undefined fields', () => {
   useManualQuery
     .mockReturnValue([executeQuery, { loading: false, error: undefined, data: InstanceVariablesWithUndefinedFields }])
 
