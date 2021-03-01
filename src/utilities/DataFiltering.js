@@ -1,9 +1,10 @@
 import { init } from './Reducers'
-import { MODEL } from '../config'
+import { MODEL, QUERY_PATH } from '../config'
+import { getNestedObject } from '@statisticsnorway/dapla-js-utilities'
 
 export const dataFiltering = (data, filterBy, filteringMatches) => data.filter(variable => {
   let doNotFilterOut = true
-  const variableId = variable.instanceVariable.id
+  const variableId = getNestedObject(variable, QUERY_PATH.IV_ID)
 
   Object.entries(filterBy).forEach(([entry, ids]) => {
     ids.forEach(id => {
@@ -23,19 +24,23 @@ export const dataFiltering = (data, filterBy, filteringMatches) => data.filter(v
 export const findHitsByType = data => {
   const unitTypeHandler = (unitTypes, variableId) => {
     unitTypes.forEach(unitType => {
-      const unitTypeId = unitType.unitType.id
+      const unitTypeId = getNestedObject(unitType, QUERY_PATH.UT_ID)
 
-      if (hitsByType[MODEL.UT].hasOwnProperty(unitTypeId)) {
-        if (!hitsByType[MODEL.UT][unitTypeId].includes(variableId)) {
-          hitsByType[MODEL.UT][unitTypeId] = hitsByType[MODEL.UT][unitTypeId].concat(variableId)
+      if (unitTypeId !== undefined) {
+        if (hitsByType[MODEL.UT].hasOwnProperty(unitTypeId)) {
+          if (!hitsByType[MODEL.UT][unitTypeId].includes(variableId)) {
+            hitsByType[MODEL.UT][unitTypeId] = hitsByType[MODEL.UT][unitTypeId].concat(variableId)
+          }
+        } else {
+          hitsByType[MODEL.UT][unitTypeId] = [variableId]
         }
-      } else {
-        hitsByType[MODEL.UT][unitTypeId] = [variableId]
       }
+      //const subjectFields = unitType.unitType.subjectFields
+      const subjectFields = getNestedObject(unitType, QUERY_PATH.UT_SF)
 
-      const subjectFields = unitType.unitType.subjectFields
-
-      subjectFieldHandler(subjectFields, variableId)
+      if (subjectFields !== undefined) {
+        subjectFieldHandler(subjectFields, variableId)
+      }
     })
   }
 
@@ -58,10 +63,12 @@ export const findHitsByType = data => {
   const hitsByType = init({})
 
   data.forEach(variable => {
-    const unitTypes = variable.instanceVariable.reverseLogicalRecordInstanceVariables
-    const variableId = variable.instanceVariable.id
+    const unitTypes = getNestedObject(variable, QUERY_PATH.IV_RL)
+    const variableId = getNestedObject(variable, QUERY_PATH.IV_ID)
 
-    unitTypeHandler(unitTypes, variableId)
+    if (unitTypes !== undefined) {
+      unitTypeHandler(unitTypes, variableId)
+    }
   })
 
   return hitsByType

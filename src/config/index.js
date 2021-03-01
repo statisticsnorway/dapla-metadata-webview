@@ -1,2 +1,2 @@
-export { API, MODEL } from './API'
+export { API, MODEL, QUERY_PATH } from './API'
 export { STORAGE } from './STORAGE'
