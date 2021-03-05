@@ -27,14 +27,14 @@ Run `yarn start` and navigate to `http://localhost:3000`.
 * Navigate to `http://localhost:8000`
 
 **Note** that this application requires
-[dapla-project localstack](https://github.com/statisticsnorway/dapla-project/blob/master/localstack/README.md)running to
+[dapla-project localstack](https://github.com/statisticsnorway/dapla-project/blob/master/localstack/README.md) running to
 function locally (or at least a running instance of
 [linked-data-store](https://github.com/statisticsnorway/linked-data-store-documentation)).
 
 **Overview Semantic UI Media Breakpoints**
 
-* mobile:     up to 767px
-* tablet:     768px - 991px
-* computer:   992px - 1200px
-* largeScreen:1200px-1920px
-* widescreen: 1920px up
+* mobile:       up to 767px
+* tablet:       768px - 991px
+* computer:     992px - 1200px
+* largeScreen:  1200px-1920px
+* widescreen:   1920px up
