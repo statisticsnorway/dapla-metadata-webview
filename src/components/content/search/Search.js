@@ -6,7 +6,7 @@ import { Input } from '@statisticsnorway/ssb-component-library'
 import SearchFiltering from './SearchFiltering'
 import ResultsView from '../results/ResultsView'
 import { LoadingOrError } from '../../common'
-import { dataFiltering, findHitsByType, init, initFilterBy, reducerFilterBy } from '../../../utilities'
+import { dataFiltering, findHitsByTypeReducer, init, initFilterBy, reducerFilterBy } from '../../../utilities'
 import { LanguageContext } from '../../../context/AppContext'
 import { FULL_TEXT_SEARCH } from '../../../graphql'
 import { SEARCH } from '../../../language'
@@ -24,7 +24,7 @@ function Search () {
   useEffect(() => {
     if (data !== undefined) {
       const filterOut = Object.entries(filterBy).map(([entry, value]) => value.length === 0)
-      const hitsByType = findHitsByType(data)
+      const hitsByType = findHitsByTypeReducer(data)
 
       setFilteringMatches(hitsByType)
 

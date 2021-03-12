@@ -1,6 +1,6 @@
 import { MODEL } from '../config'
 
-export const init = (initValue) => Object.entries(MODEL).reduce((accumulator, [key, value]) => {
+export const init = initValue => Object.entries(MODEL).reduce((accumulator, [key, value]) => {
   accumulator[value] = initValue
 
   return accumulator

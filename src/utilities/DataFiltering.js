@@ -21,55 +21,67 @@ export const dataFiltering = (data, filterBy, filteringMatches) => data.filter(v
   return doNotFilterOut
 })
 
-export const findHitsByType = data => {
-  const unitTypeHandler = (unitTypes, variableId) => {
-    unitTypes.forEach(unitType => {
-      const unitTypeId = getNestedObject(unitType, QUERY_PATH.UT_ID)
-
-      if (unitTypeId !== undefined) {
-        if (hitsByType[MODEL.UT].hasOwnProperty(unitTypeId)) {
-          if (!hitsByType[MODEL.UT][unitTypeId].includes(variableId)) {
-            hitsByType[MODEL.UT][unitTypeId] = hitsByType[MODEL.UT][unitTypeId].concat(variableId)
-          }
-        } else {
-          hitsByType[MODEL.UT][unitTypeId] = [variableId]
-        }
-      }
-      //const subjectFields = unitType.unitType.subjectFields
-      const subjectFields = getNestedObject(unitType, QUERY_PATH.UT_SF)
-
-      if (subjectFields !== undefined) {
-        subjectFieldHandler(subjectFields, variableId)
-      }
-    })
-  }
-
-  const subjectFieldHandler = (subjectFields, variableId) => {
-    if (subjectFields.length !== 0) {
-      subjectFields.forEach(subjectField => {
-        const subjectFieldId = subjectField.id
-
-        if (hitsByType[MODEL.SF].hasOwnProperty(subjectFieldId)) {
-          if (!hitsByType[MODEL.SF][subjectFieldId].includes(variableId)) {
-            hitsByType[MODEL.SF][subjectFieldId] = hitsByType[MODEL.SF][subjectFieldId].concat(variableId)
-          }
-        } else {
-          hitsByType[MODEL.SF][subjectFieldId] = [variableId]
-        }
-      })
+const setAccumulator = (id, variableId, accumulator, previous) => {
+  if (previous[id] === undefined) {
+    if (accumulator[id] === undefined) {
+      accumulator[id] = [variableId]
+    }
+  } else {
+    if (accumulator[id] === undefined) {
+      accumulator[id] = [...previous[id], variableId]
     }
   }
 
-  const hitsByType = init({})
-
-  data.forEach(variable => {
-    const unitTypes = getNestedObject(variable, QUERY_PATH.IV_RL)
-    const variableId = getNestedObject(variable, QUERY_PATH.IV_ID)
-
-    if (unitTypes !== undefined) {
-      unitTypeHandler(unitTypes, variableId)
-    }
-  })
-
-  return hitsByType
+  return accumulator
 }
+
+const getUnitTypes = (currentValue, variableId, prevUnitTypes) => {
+  const unitTypes = getNestedObject(currentValue, QUERY_PATH.IV_RL)
+
+  if (unitTypes !== undefined && unitTypes.length !== 0) {
+    return unitTypes.reduce((accumulator, currentValue) => {
+      const unitTypeId = getNestedObject(currentValue, QUERY_PATH.UT_ID)
+
+      accumulator = setAccumulator(unitTypeId, variableId, accumulator, prevUnitTypes)
+
+      return accumulator
+    }, {})
+  } else {
+    return {}
+  }
+}
+
+const getSubjectFields = (currentValue, variableId, prevSubjectFields) => {
+  const unitTypes = getNestedObject(currentValue, QUERY_PATH.IV_RL)
+
+  if (unitTypes !== undefined && unitTypes.length !== 0) {
+    return unitTypes.reduce((accumulator, currentValue) => {
+      const subjectFields = getNestedObject(currentValue, QUERY_PATH.UT_SF)
+
+      if (subjectFields !== undefined && subjectFields.length !== 0) {
+        accumulator = subjectFields.reduce((accumulator, currentValue) => {
+          const subjectFieldId = getNestedObject(currentValue, QUERY_PATH.SF_ID)
+
+          accumulator = setAccumulator(subjectFieldId, variableId, accumulator, prevSubjectFields)
+
+          return accumulator
+        }, {})
+      }
+
+      return accumulator
+    }, {})
+  } else {
+    return {}
+  }
+}
+
+export const findHitsByTypeReducer = data => data.reduce((accumulator, currentValue) => {
+  const variableId = getNestedObject(currentValue, QUERY_PATH.IV_ID)
+  const unitTypes = getUnitTypes(currentValue, variableId, accumulator[MODEL.UT])
+  const subjectFields = getSubjectFields(currentValue, variableId, accumulator[MODEL.SF])
+
+  accumulator[MODEL.UT] = { ...accumulator[MODEL.UT], ...unitTypes }
+  accumulator[MODEL.SF] = { ...accumulator[MODEL.SF], ...subjectFields }
+
+  return accumulator
+}, init({}))

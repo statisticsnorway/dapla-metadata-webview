@@ -10,6 +10,7 @@ export const MODEL = {
 }
 
 export const QUERY_PATH = {
+  SF_ID: ['id'],
   UT_ID: ['unitType', 'id'],
   UT_SF: ['unitType', 'subjectFields'],
   IV_ID: ['instanceVariable', 'id'],

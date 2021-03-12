@@ -1,2 +1,2 @@
-export { dataFiltering, findHitsByType } from './DataFiltering'
+export { dataFiltering, findHitsByTypeReducer } from './DataFiltering'
 export { init, initFilterBy, reducerFilterBy } from './Reducers'
